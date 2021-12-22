@@ -95,7 +95,7 @@
 
   .text-input--has-content .text-input__input[aria-invalid=false] + & {
     &::before {
-      @include icon('');
+      @include icon('\f00c');
       animation: growIn 250ms;
       bottom: 0;
       color: var(--color-success);

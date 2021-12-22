@@ -8,13 +8,15 @@
     "url": "https://github.com/calebjacob/remix"
   },
   "scripts": {
+    "build": "run-s build:*",
     "build:css": "sass ./app/styles/index.scss ./app/styles/build/index.css --style=compressed",
-    "build:remix": "remix build",
-    "build": "npm run build:css && npm run build:remix",
-    "dev:css": "sass --watch ./app/styles/index.scss ./app/styles/build/index.css",
-    "dev:remix": "node -r dotenv/config node_modules/.bin/remix dev",
+    "build:source": "remix build",
     "dev": "run-p dev:*",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx ./ --fix",
+    "dev:css": "sass --watch ./app/styles/index.scss ./app/styles/build/index.css",
+    "dev:source": "node -r dotenv/config node_modules/.bin/remix dev",
+    "lint": "run-s lint:*",
+    "lint:css": "stylelint '**/*.scss' --fix",
+    "lint:source": "eslint --ext .js,.jsx,.ts,.tsx ./ --fix",
     "postinstall": "remix setup node",
     "production": "npm run start",
     "start": "remix-serve build"

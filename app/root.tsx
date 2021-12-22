@@ -1,5 +1,6 @@
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix';
+import type { DescriptiveThrownResponse } from './utils/throw-response';
 import type { MetaFunction } from 'remix';
+import { useCatch, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix';
 import TheHeader from './components/the-header';
 import TheFooter from './components/the-footer';
 import fontAwesomeStyles from './styles/globals/font-awesome.css';
@@ -30,7 +31,7 @@ export function links() {
   ];
 }
 
-export default function App() {
+function Document({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
@@ -49,7 +50,8 @@ export default function App() {
           <div className="wrapper__content">
             <TheHeader />
 
-            <Outlet />
+            {children}
+
             <ScrollRestoration />
             <Scripts />
             {process.env.NODE_ENV === 'development' && <LiveReload />}
@@ -59,5 +61,63 @@ export default function App() {
         </div>
       </body>
     </html>
+  );
+}
+
+export default function App() {
+  return (
+    <Document>
+      <Outlet />
+    </Document>
+  );
+}
+
+export function CatchBoundary() {
+  const caught = useCatch<DescriptiveThrownResponse>();
+
+  return (
+    <Document>
+      <div className="layout layout--vertical-align">
+        <div className="container center">
+          <div className="group">
+            <span className="icon icon--block icon--large fa-exclamation-triangle color-danger"></span>
+
+            <h1 className="title title--2">
+              {caught.status}: {caught.data.message}
+            </h1>
+
+            {caught.data.details ? <p className="bigger">{caught.data.details}</p> : null}
+          </div>
+
+          <hr />
+
+          <a href="/" className="button">
+            Go Home
+          </a>
+        </div>
+      </div>
+    </Document>
+  );
+}
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return (
+    <Document>
+      <div className="layout layout--vertical-align">
+        <div className="container center">
+          <div className="goup">
+            <span className="icon icon--block icon--large fa-exclamation-triangle color-danger"></span>
+            <h1 className="title title--2">Oops! An error occurred.</h1>
+            <p className="bigger">{error.message}</p>
+          </div>
+
+          <hr />
+
+          <a href="/" className="button">
+            Go Home
+          </a>
+        </div>
+      </div>
+    </Document>
   );
 }

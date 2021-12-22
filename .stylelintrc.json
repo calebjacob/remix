@@ -4,6 +4,7 @@
     "color-named": null,
     "selector-class-pattern": null,
     "selector-no-qualifying-type": null,
-    "max-nesting-depth": 4
+    "max-nesting-depth": 4,
+    "length-zero-no-unit": null
   }
 }

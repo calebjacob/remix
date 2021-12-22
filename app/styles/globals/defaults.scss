@@ -16,7 +16,7 @@ body {
 
 html {
   font-size: 16px;
-  line-height: 1.4em;
+  line-height: 1.5;
 }
 
 body {
@@ -30,7 +30,6 @@ body {
 p {
   color: var(--color-text-2);
   font-size: var(--font-size-body-1);
-  line-height: 1.4em;
   margin-bottom: var(--spacing);
 }
 
@@ -91,6 +90,5 @@ input:-webkit-autofill:active {
 @media (max-width: $mobile-breakpoint) {
   html {
     font-size: 14px;
-    line-height: 1.4em;
   }
 }

@@ -3,7 +3,7 @@ import type { MetaFunction } from 'remix';
 import { useCatch, Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix';
 import TheHeader from './components/the-header';
 import TheFooter from './components/the-footer';
-import fontAwesomeStyles from './styles/globals/font-awesome.css';
+import fontAwesomeStyles from './styles/font-awesome.css';
 import styles from './styles/build/index.css';
 
 export const meta: MetaFunction = () => {
